@@ -9,4 +9,8 @@ register(
     id='reaching-v1',
     entry_point='rli_gym.envs:ReachingEnv2D_v1'
 )
+register(
+    id='reaching-v2',
+    entry_point='rli_gym.envs:ReachingEnv2D_v2'
+)
 

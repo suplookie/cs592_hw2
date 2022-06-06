@@ -2,6 +2,7 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
 
 class Qlearning:
     
@@ -122,6 +123,8 @@ class Qlearning:
     def test(self):
         """test"""
         state = self.env.reset() 
+        traj = []
+        print("test")
 
         while True:
             self.env.render()
@@ -133,5 +136,18 @@ class Qlearning:
             if done:
                 self.env.close()
                 break
+            traj = np.append(traj, action)
+        #self.env.render_value_map(self.Q, self.grid_dim[0])
+        
 
-        self.env.render_value_map(self.Q, self.grid_dim[0])
+        img = cv2.imread('test_2.png', cv2.IMREAD_COLOR)
+        img[76, 23] = [0, 0, 255]
+        img[14, 58] = [0, 0, 255]
+        i = 13
+        j = 58
+        for t in traj:
+            i += self.actions[int(t)][0]
+            j += self.actions[int(t)][1]
+            img[i, j] = [0, 255, 0]
+        cv2.imwrite("./test_2_qlearn.png", img)
+        print(traj)
