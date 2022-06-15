@@ -6,7 +6,7 @@ import cv2
 
 class Qlearning:
     
-    def __init__(self, env, actions, resolution, grid_limits,
+    def __init__(self, env, actions, resolution, grid_limits, name,
                     epsilon=.3, total_steps=100000, alpha=.4, gamma=.95):
         self.epsilon = epsilon
         self.total_steps = total_steps
@@ -23,6 +23,7 @@ class Qlearning:
         self.observation_dim = self.get_grid_index(self.grid_dim-1)+1
 
         self.Q = np.zeros((self.observation_dim, self.action_dim), dtype=np.float64)
+        self.file_name = name
 
 
     def get_grid_index(self, state):
@@ -137,7 +138,7 @@ class Qlearning:
                 self.env.close()
                 break
             traj = np.append(traj, action)
-        #self.env.render_value_map(self.Q, self.grid_dim[0])
+        self.env.render_value_map(self.Q, self.grid_dim[0])
         
 
         img = cv2.imread('test_2.png', cv2.IMREAD_COLOR)
@@ -149,5 +150,5 @@ class Qlearning:
             i += self.actions[int(t)][0]
             j += self.actions[int(t)][1]
             img[i, j] = [0, 255, 0]
-        cv2.imwrite("./test_2_qlearn.png", img)
+        cv2.imwrite("./" + self.file_name + ".png", img)
         print(traj)

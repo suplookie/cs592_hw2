@@ -41,6 +41,7 @@ class ReachingEnv2D_v2(gym.Env):
         self.seed(0)
         self.states = None
         self.first_render = False
+        self.lecture_rooms = np.empty((0,2))
 
     @property
     def action_space(self):
@@ -165,6 +166,8 @@ class ReachingEnv2D_v2(gym.Env):
     ##     return self.reward_fn(states)
     def get_states(self):
         return self.states    
+    def get_lecture_rooms(self):
+        return self.lecture_rooms
         
     def set_start_state(self, state):
         self.start_state = np.array(copy.deepcopy(state))
@@ -184,6 +187,8 @@ class ReachingEnv2D_v2(gym.Env):
         self.robot_size = robot_size
     def set_states(self, states):
         self.states = states
+    def set_lecture_rooms(self, rooms):
+        self.lecture_rooms = rooms
 
 
 def make_default_reward(goal_state):

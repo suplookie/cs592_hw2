@@ -4,7 +4,6 @@ import gym
 import rli_gym
 from qlearning import Qlearning
 from sklearn.neighbors import BallTree
-from pyvirtualdisplay import Display
 
 def generate_obstacles(xlim, ylim):
     """ 
@@ -60,8 +59,6 @@ def make_reward(goal_state):
     
 if __name__ == '__main__':
 
-    display = Display(visible=False, size=(400,300))
-    display.start()
 
     # Initialize variables
     start = [3.,18.]
